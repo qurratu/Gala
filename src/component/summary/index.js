@@ -20,8 +20,6 @@ const Summary =()=>{
         .catch((err)=>{
           err&& alert('please try again')})
         },[id[3]])
-        console.log('signle nactivity List',activity)
-    
 
 return(
 <>

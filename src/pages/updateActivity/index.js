@@ -1,13 +1,10 @@
 import React ,{ useState} from 'react'
-import { Modal, Button, Form, Col ,Card,Row} from "react-bootstrap";
+import { Button, Form, Col ,Card,Row} from "react-bootstrap";
 import Header from '../../header';
 import './updateactivity.css'
-import {useHistory,Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import Datepicker from "react-datepicker";
 import Api from '../../Api'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import image from '../../assets/upload_img.png';
 import Sidebar from '../../sidebar'
 import { useEffect } from 'react';
 import MyEditor from '../../component/ckEditors'
@@ -19,7 +16,7 @@ const UpdateActivity =()=>{
   const [error, setError] = useState(true);
   const [activity, setActivity] = useState(null);
   const [summary, setSummary] = useState(null);
-  const [file, setFile] = React.useState([])
+  const [file, setFile] = React.useState('')
     const [formValues,setFormValues]=useState('')
     const [validated, setValidated] = useState(false);
     const [firstDatePickerClass, setFirstDatePickerClass] = useState("");
@@ -30,20 +27,19 @@ const UpdateActivity =()=>{
     let url = window.location.pathname
     let id=url&&url.split('/')
   
-useEffect(()=>{
-
-  id&&
-  Api.getOneActivity(id[3])
-  .then((res)=>{setActivity(res.data.data)
-    // selectFile(res.data.data.products)
-    setPropsList(res.data.data.property)
-  })
-  .catch((err)=>{
-    console.log('please try again',err)
-    setError(false)
-  alert('please try again')
-  })
-},[])
+          useEffect(()=>{
+            Api.getOneActivity(id[3])
+            .then((res)=>{setActivity(res.data.data)
+              setPropsList(res.data.data.property)
+              // setFile(res.data.data.products[0])
+              res.data.data.products[0]&&showImg(res.data.data.products[0])
+            })
+            
+            .catch((err)=>{
+              setError(false)
+            alert('please try again')
+            })
+          },[])
 
 
     const filterPassedTime = (time) => {
@@ -58,7 +54,6 @@ useEffect(()=>{
           const update_activity=(e)=>{
             document.getElementById("careerLoader").classList.add("loading")
             e.preventDefault();
-           
             window.confirm('Do you want to update this Activity')
             const data= ({
               title: formValues.title?formValues.title:activity.title,
@@ -70,7 +65,7 @@ useEffect(()=>{
               news: news?news:activity.news,
               summaryStatus:summaryStatus?summaryStatus:activity.summaryStatus,
               summary:summary?summary:activity.summary,
-              products: file?formValues.title:activity.products,
+              products: file?file:activity.products,
               duration:secondOption?secondOption:activity.duration,
         })
                 Api.updateActivity(id[3],data)
@@ -84,6 +79,30 @@ useEffect(()=>{
                 })
     }
     
+
+    const showImg=(objext)=>{
+      console.log('filefilefile',objext)
+      if(objext){
+        if(objext.product1){
+          let imgPreview = document.getElementById('product1').previousSibling;
+          imgPreview.style.display = "block";
+          imgPreview.innerHTML = '<img src="' + objext.product1.url + '" />';
+        }
+        if(objext.product2){
+          let imgPreview = document.getElementById('product2').previousSibling;
+          imgPreview.style.display = "block";
+          imgPreview.innerHTML = '<img src="' + objext.product2.url + '" />';
+        }
+        if(objext.product3){
+          let imgPreview = document.getElementById('product3').previousSibling;
+          imgPreview.style.display = "block";
+          imgPreview.innerHTML = '<img src="' + objext.product3.url + '" />';
+        }
+      }
+     
+   
+
+    }
 
     // make input as btn and show uploaded image
     const selectFile=(e)=> {
@@ -119,7 +138,6 @@ useEffect(()=>{
 
         const ditachctivity=(item)=>{
           document.getElementById("careerLoader").classList.add("loading")
-          console.log('actitt ite',item)
             Api.ditachActivitybyadmin(item.activity_id,item.user_id._id)
                 .then(()=>{
                   document.getElementById("careerLoader").classList.remove("loading")
@@ -145,8 +163,6 @@ useEffect(()=>{
         ...formValues,
         [name]: value
       });
-     console.log('namename',name) 
-     console.log('valuevalue',value) 
     }
     const handleFirstDate = (date) => {
         if (date) {
@@ -175,7 +191,6 @@ useEffect(()=>{
    
         const deleteItem=(e)=>{
           const index = propsList.indexOf(e);
-          console.log('index',index)
           if (index > -1) {
             propsList.splice(index, 1);
           }
@@ -236,7 +251,6 @@ useEffect(()=>{
                       required
                       controlId="formGridPhoneNumber"
                     >
-                      {console.log('myNumber',activity.phone)}
                       <Form.Label className="notes">Mobile or Phone Number *</Form.Label>
                       <Form.Control
                         name="phone"
@@ -286,16 +300,18 @@ useEffect(()=>{
                       required
                       controlId="formGridFstoption"
                     >
+                    {console.log('daye',activity.duration&&activity.duration[0])}
                       <Form.Label className="notes">Start Time *</Form.Label>
                       <Datepicker
                         placeholderText="Aug 6, 12:00AM"
                         wrapperClassName="datepicker-wrapper"
                         className={`datepicker-input ${firstDatePickerClass}`}
-                        selected={startDate}
+                        // selected={activity.duration&&activity.duration[0]&&activity.duration&&activity.duration[0].start_time}
                         onChange={(date) => handleFirstDate(date)}
                         showTimeSelect
                         name="time_1"
-                        defaultValue={activity.created_date}
+                        // selected={activity.duration?activity.duration[0]?activity.duration?activity.duration[0].start_time ? moment(props.input.value, 'DD-MM-YYYY') : moment()}
+                        // defaultValue={activity.created_date}
                         filterTime={filterPassedTime}
                         dateFormat="MMMM d, hh:mm aa"
                         required
@@ -343,48 +359,86 @@ useEffect(()=>{
               
 
 
-                    <div className='createActivityRow'>
-                        
-                  <Form.Label className="productImages notes">
-                        Add product
-                      </Form.Label>
-                      <Form.Group  as={Row}>
-                          <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
-                          <form>
-                              <div>
-                                <div id="img-preview"></div>
-                                <input type="file" id="product1"
-                                 onChange={selectFile} name="product1" accept="image/*" />
-                                <div className='price' id="Price_product1"></div>
-                                <label htmlFor="product1" className='chooseFile'>Choose File</label>
-                              
-                              </div>
-                            </form>
-                          </Form.Group>
-                          <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
-                          <form>
-                              <div>
-                                <div id="img-preview"></div>
-                                <input type="file" id="product2" onChange={selectFile} name="product2" accept="image/*" />
-                                <div className='price' id="Price_product2"></div>
-                                <label htmlFor="product2" className='chooseFile'>Choose File</label>
-                              
-                              </div>
-                            </form>
-                          </Form.Group>
-                          <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
-                          <form>
-                              <div>
-                                <div id="img-preview"></div>
-                                <input type="file" id="product3" onChange={selectFile} name="product3" accept="image/*" />
-                                <div className='price' id="xPrice_product3"></div>
-                                <label htmlFor="product3" className='chooseFile'>Choose File</label>
-                              
-                              </div>
-                            </form>
-                          </Form.Group>
-                      </Form.Group>
-                  </div>
+                  <div className='createActivityRow'>
+                   
+                   <Form.Label className="productImages notes">
+                         Add product
+                       </Form.Label>
+                       <Form.Group  as={Row}>
+                           <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
+                           <form>
+                               <div>
+                                 <div id="img-preview"></div>
+                                 <input type="file" id="product1" onChange={(e)=>selectFile(e)} name="product1" accept="image/*" />
+                                 <div className='price' id="Price_product1">
+                                   {console.log('eeeeeee',file)}
+                                   {((file&&file.product1)||(activity.products&&activity.products[0]&&activity.products[0].product1))&&
+                                 <Form.Control
+                                 name="product1_price"
+                                 type="number"
+                                 inputmode="tel"
+                                 defaultValue={activity.products[0].product1.product_price?activity.products[0].product1.product_price:file.product1.product_price}
+                                 required
+                                 placeholder="$500"
+                               />
+                                
+                                } 
+                                 </div>
+                          
+                                 <label htmlFor="product1" className='chooseFile'>Choose File</label>
+                               </div>
+                             </form>
+                           </Form.Group>
+                           <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
+                           <form>
+                               <div>
+                                 <div id="img-preview"></div>
+                                 <input type="file" id="product2" onChange={(e)=>selectFile(e)} name="product2" accept="image/*" />
+                                 <div className='price' id="Price_product2">
+                                 {((file&&file.product2)||(activity.products&&activity.products[0]&&activity.products[0].product2))&&
+                                 <Form.Control
+                                 name="product2_price"
+                                 type="number"
+                                 inputmode="tel"
+                                 defaultValue={activity.products[0].product2.product_price?activity.products[0].product2.product_price:file.product2.product_price}
+                                 required
+                                 placeholder="$500"
+                               />
+                                
+                                }  
+       
+                                 </div>
+                               
+                                 <label htmlFor="product2" className='chooseFile'>Choose File</label>
+                                
+                               </div>
+                             </form>
+                           </Form.Group>
+                           <Form.Group as={Col} sm="12" md="4"controlId="formGridEmail" > 
+                           <form>
+                               <div>
+                                 <div id="img-preview"></div>
+                                 <input type="file" id="product3" onChange={(e)=>selectFile(e)} name="product3" accept="image/*" />
+                                 <div className='price' id="xPrice_product3">
+                                 {((file&&file.product3)||(activity.products&&activity.products[0]&&activity.products[0].product3))&&
+                                 <Form.Control
+                                 name="product3_price"
+                                 type="number"
+                                 inputmode="tel"
+                                 defaultValue={activity.products[0].product3.product_price?activity.products[0].product3.product_price:file.product3.product_price}
+                                 required
+                                 placeholder="$500"
+                               />
+                                
+                                }      
+                                 </div>
+                                 <label htmlFor="product3" className='chooseFile'>Choose File</label>
+                                
+                               </div>
+                             </form>
+                           </Form.Group>
+                       </Form.Group>
+                   </div>
 
                   <div className='createActivityRow'>
                   <Form.Label className="notes">

@@ -50,9 +50,6 @@ const Home =()=>{
           .catch((err)=>  loader&&loader.classList.remove("loading"))
         }
 
-
-          console.log('res',activityList)
-
      const onChange = () => {
        if(formValues){
         let a= activityList.filter((item)=>{
@@ -97,7 +94,6 @@ const Home =()=>{
 
 
     const handlePageClick = (data) => {
-      console.log('pagination',data)
       let selected = data.selected;
       // let offset = Math.ceil(selected * 10);
       setSelectedPage(selected);

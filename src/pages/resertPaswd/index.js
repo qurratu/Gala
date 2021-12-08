@@ -31,8 +31,6 @@ const ResetPswd =()=>{
             phone:formValues.phone,
             password:formValues.password
         })
-        console.log('ormValues.retype',formValues.retype)
-        console.log('ormValues.retype',formValues.password)
         if(formValues.retype===formValues.password){
             Api.resetpswd(formValues.email,data)
             .then((res)=>{
@@ -55,9 +53,6 @@ const ResetPswd =()=>{
         ...formValues,
         [name]: value
       });
-      
-      console.log('name',name)
-      console.log('value',value)
     }
 
     const myFunction=(e)=> {

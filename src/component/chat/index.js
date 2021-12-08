@@ -34,10 +34,8 @@ const Chat =(props)=>{
             Api.getgroupchat(id[3])
             .then((res)=>{
               setChatList(res.data.conversation)
-              console.log('signlechat List',res)
             })
             .catch((err)=>{
-              
               console.log(err)
             })
              
@@ -48,7 +46,7 @@ const Chat =(props)=>{
         Api.getgroupchat(massageId)
         .then((res)=>{
           getChatList()
-          console.log('signle nactivity List',res)
+         
         })
         .catch((err)=>{
           err&& alert('please try again')})
@@ -61,8 +59,6 @@ const Chat =(props)=>{
         Api.groupchat(id[3],data)
         .then((res)=>{
           getChatList()
-          // setChatList(res.data.data)
-          console.log('signle nactivity List',res)
         })
         .catch((err)=>{
           console.log('chatERR',err)
@@ -70,7 +66,6 @@ const Chat =(props)=>{
 
       }
 
-      console.log('chatlistchatlist',chatlist)
 
 
 return(

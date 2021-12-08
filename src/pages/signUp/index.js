@@ -47,7 +47,7 @@ const SignUp =()=>{
       useEffect(()=>{
         Api.collegeList()
         .then((res)=>{setCollegeList(res.data.data)
-        console.log('collegeList',res.data.data)
+   
         })
         .catch((err)=>console.log('Error',err))
       },[])
@@ -58,10 +58,6 @@ const SignUp =()=>{
         ...formValues,
         [name]: value
       });
-
-      console.log('namename',name)
-      console.log('valuevalue',value)
-      
     }
 
     const showPswd=(e)=> {

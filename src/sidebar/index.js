@@ -23,7 +23,6 @@ useEffect(()=>{
   })
 },[props.homePageList&&props.homePageList])
 
-console.log('setJoinedList',joinedList)
   return (
   
 

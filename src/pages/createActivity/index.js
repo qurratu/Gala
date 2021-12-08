@@ -68,7 +68,6 @@ const CreateActivity =()=>{
           type:"activity"
           
       })
-      console.log('jannat.data',res.data.data._id)
         Api.room_initiate(data2)
         .then(()=> document.getElementById("careerLoader").classList.remove("loading"))
           alert('sucessfull')
@@ -126,8 +125,6 @@ const CreateActivity =()=>{
         ...formValues,
         [name]: value
       });
-     console.log('namename',name) 
-     console.log('valuevalue',value) 
     }
 
     const handleFirstDate = (date) => {
@@ -409,7 +406,7 @@ className=' w-100 h-100 d-flex'>
                         </div>
                       </form>
                     </Form.Group>
-</Form.Group>
+                </Form.Group>
             </div>
 
 

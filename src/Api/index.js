@@ -12,7 +12,7 @@ const Instance1 = () => {
 }
 const Instance = () => {
     const token=localStorage.getItem('access_token')
-    console.log('Token',token)
+ 
    
     return axios.create({
         headers: {"Authorization" : `Bearer ${token}`,

@@ -31,7 +31,6 @@ const ProductItem =(props)=>{
               
           }
 
-          console.log('signle nactivity List',activity.products)
       const getcheckList =(e)=>{
       if(e.target.checked){
           setCheckList ([
@@ -39,7 +38,6 @@ const ProductItem =(props)=>{
             ])
       }else{
           const index = checkList.indexOf(e.target.Id);
-                console.log('index',index)
                 if (index > -1) {
                   checkList.splice(index, 1);
                 }
@@ -64,7 +62,6 @@ return(
      <div className= "img-select">
        {activity.products[0].product1&&
         <div className= "img-item">
-       {console.log('urlImages',)}
      <a href = {activity.products[0].product1.url}  className='h-75' data-id = "1">
        <div className="productImgPreview">
        <img src = {activity.products[0].product1.url} alt = "shoe image"/>

@@ -40,12 +40,11 @@ const AdminDashboard =()=>{
                   setTotalPage(b)
                 }
               }
-              console.log('res',res.data)
+           
               setActivityList(res.data.data)
               document.getElementById("careerLoader").classList.remove("loading")
             })
             .catch((err)=>{
-              console.log('Error',err)
               document.getElementById("careerLoader").classList.remove("loading")
              } )
           }

@@ -23,9 +23,6 @@ const Detail =()=>{
         .catch((err)=>{
           err&& alert('please try again')})
         },[id[3]])
-        console.log('signle nactivity List',activity)
-    
-
 return(
 <>
 <div className='h-100 w-100 d-flex'>
