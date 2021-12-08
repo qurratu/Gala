@@ -8,7 +8,8 @@ const ActivityOption=(props)=> {
     const joinactivity=(item)=>{
     const data=({participate: false}) 
     id&&  Api.joinedActivityparticipant(id[3],data)
-      .then(()=>{alert('activity sucessfully joined')
+      .then(()=>{
+        history.push('/home')
     })
       .catch((err)=>{alert('please try again',err)})
     }
@@ -23,6 +24,7 @@ const ActivityOption=(props)=> {
                       onClick={joinactivity}
                       className="form-control view-profile-btn"
                     //   to={`/home`}
+                    style={{cursor:"pointer"}}
                     >
                       Exit Activity
                     </span>
@@ -70,13 +72,20 @@ const ActivityOption=(props)=> {
         Summary</Link>
         </div>
       }  </div>
-    <div className='h-50'>
-      {props.activity_data.property&&props.activity_data.property.map((item)=>(
+    <div className='h-50'>{props.activity_data.property&&props.activity_data.property.length>0&&
+    <>
+       <span>checkList Items</span>
+      {props.activity_data.property.map((item)=>(
         <span key={item._id}>
       <input type="checkbox" id="vehicle2" name="vehicle2" value="Car"/>
   <label for="vehicle2" className='pl-3'> {item}</label><br/>
       </span>
       ))}
+    </>
+   
+    
+    }
+    
       
    
     </div>

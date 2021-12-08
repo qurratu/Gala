@@ -97,7 +97,7 @@ return(
        <div className='chatbox w-75 h-100'>
         
          <span className='chat_user_name '>
-           {`${item.postedByUser.first_name} ${item.postedByUser.first_name}`}
+           {`${item.postedByUser.first_name} ${item.postedByUser.last_name}`}
         
          </span>
          <span

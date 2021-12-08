@@ -1,6 +1,6 @@
 import React ,{ useState,useEffect} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faGrin } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import ReactPaginate from "react-paginate";
 import { Col,Row,Card,Button } from 'react-bootstrap'
 import Header from '../../header';
@@ -106,11 +106,7 @@ return(
                   <Link
                     className="clinic-name"
                     rel="canonical"
-                  //   onClick={localStorage.setItem(
-                  //     "clinicDetail",
-                  //     JSON.stringify(item)
-                  //   )}
-                  //   to={`${localRoute.details}/${slugName}-at-${item.slug}`}
+              
                   >
                     <h5
                     style={{fontSize:'1.5vw'}}
@@ -129,17 +125,34 @@ return(
                   />{" "}
                 {item.location}
               </div>
+              {item.duration&&item.duration[0]&&
               <div
-                className="profile-address mt-2">
-                  {/* <FontAwesomeIcon
-                    className="clinic-map-icon mr-1"
-                    icon={faMapMarkerAlt}
-                  />{" "} */}
-                  Start:
-                  121001  End:
-                  121001
                 
-              </div>
+                className="profile-address date_duration mt-2">
+                  {item.duration[0].start_time&&
+                  
+                  <span>
+                  <FontAwesomeIcon
+                    className="clinic-map-icon mr-1"
+                    icon={faCalendar}
+                  />{" "}
+                 Start:
+                 {item.duration[0].start_time.replace('T','  ').replace(':00.000Z',' ')}
+                  </span>}
+                
+                  {item.duration[0].end_time&&
+                  <span>
+                  <FontAwesomeIcon
+                    className="clinic-map-icon mr-1"
+                    icon={faCalendar}
+                  />{" "}
+                   End:
+                 {item.duration[0].end_time.replace('T','  ').replace(':00.000Z',' ')}
+                  </span>
+}
+               
+                
+              </div>}
               </Col>
             </Row>
               <Row className="mt-4">
