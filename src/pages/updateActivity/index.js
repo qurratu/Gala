@@ -23,6 +23,7 @@ const UpdateActivity =()=>{
     const [startDate, setStartDate] = useState((new Date(), 0), 9);
     const [secondOption, setSecondOption] = useState((new Date(), 0), 9);
     const [propsList, setPropsList] = useState([]);
+    const [production, setProduction] = useState([]);
     const [summaryStatus, setSummaryStatus] = useState(false);
     let url = window.location.pathname
     let id=url&&url.split('/')
@@ -31,7 +32,8 @@ const UpdateActivity =()=>{
             Api.getOneActivity(id[3])
             .then((res)=>{setActivity(res.data.data)
               setPropsList(res.data.data.property)
-              // setFile(res.data.data.products[0])
+
+              res.data.data.products&&setProduction(res.data.data.products[0])
               res.data.data.products[0]&&showImg(res.data.data.products[0])
             })
             
@@ -81,19 +83,22 @@ const UpdateActivity =()=>{
     
 
     const showImg=(objext)=>{
-      console.log('filefilefile',objext)
+     
       if(objext){
         if(objext.product1){
+          console.log('filefilefile',objext.product1.url)
           let imgPreview = document.getElementById('product1').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product1.url + '" />';
         }
         if(objext.product2){
+          console.log('filefilefile',objext.product2.url)
           let imgPreview = document.getElementById('product2').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product2.url + '" />';
         }
         if(objext.product3){
+         
           let imgPreview = document.getElementById('product3').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product3.url + '" />';
@@ -104,6 +109,8 @@ const UpdateActivity =()=>{
 
     }
 
+
+    console.log('filefilefile',news)
     // make input as btn and show uploaded image
     const selectFile=(e)=> {
       // let name=e.target.name
@@ -371,18 +378,22 @@ const UpdateActivity =()=>{
                                  <div id="img-preview"></div>
                                  <input type="file" id="product1" onChange={(e)=>selectFile(e)} name="product1" accept="image/*" />
                                  <div className='price' id="Price_product1">
-                                   {console.log('eeeeeee',file)}
-                                   {((file&&file.product1)||(activity.products&&activity.products[0]&&activity.products[0].product1))&&
+                                  
+                                   {((file&&file.product1)||(production&&production.product1))&&
                                  <Form.Control
                                  name="product1_price"
                                  type="number"
                                  inputmode="tel"
-                                 defaultValue={activity.products[0].product1.product_price?activity.products[0].product1.product_price:file.product1.product_price}
+                                //  defaultValue={production.product1&&production.product1.product_price
+                                //   ?production.product2.product_price:file.product2.product_price
+                                //   ?file.product2.product_price:0}
                                  required
                                  placeholder="$500"
                                />
                                 
                                 } 
+{console.log('eeeeeee',production.product3)}
+
                                  </div>
                           
                                  <label htmlFor="product1" className='chooseFile'>Choose File</label>
@@ -395,12 +406,15 @@ const UpdateActivity =()=>{
                                  <div id="img-preview"></div>
                                  <input type="file" id="product2" onChange={(e)=>selectFile(e)} name="product2" accept="image/*" />
                                  <div className='price' id="Price_product2">
-                                 {((file&&file.product2)||(activity.products&&activity.products[0]&&activity.products[0].product2))&&
+                                   {console.log('time',production?.product2?.product_price)}
+                                 {((file&&file.product2)||(production.product2))&&
                                  <Form.Control
                                  name="product2_price"
                                  type="number"
                                  inputmode="tel"
-                                 defaultValue={activity.products[0].product2.product_price?activity.products[0].product2.product_price:file.product2.product_price}
+                                //  defaultValue={production.product2&&production.product2.product_price
+                                //   ?production.product2.product_price:file.product2.product_price
+                                //   ?file.product2.product_price:0}
                                  required
                                  placeholder="$500"
                                />
@@ -420,12 +434,14 @@ const UpdateActivity =()=>{
                                  <div id="img-preview"></div>
                                  <input type="file" id="product3" onChange={(e)=>selectFile(e)} name="product3" accept="image/*" />
                                  <div className='price' id="xPrice_product3">
-                                 {((file&&file.product3)||(activity.products&&activity.products[0]&&activity.products[0].product3))&&
+                                 {((file&&file.product3)||(production.product3))&&
                                  <Form.Control
                                  name="product3_price"
                                  type="number"
                                  inputmode="tel"
-                                 defaultValue={activity.products[0].product3.product_price?activity.products[0].product3.product_price:file.product3.product_price}
+                                //  defaultValue={production.product3&&production.product3.product_price
+                                //   ?production.product3.product_price:file.product3.product_price
+                                //   ?file.product3.product_price:0}
                                  required
                                  placeholder="$500"
                                />

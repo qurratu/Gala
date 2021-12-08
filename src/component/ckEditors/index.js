@@ -2,7 +2,7 @@ import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Api from "../../Api";
-// const API_URL = "http://localhost:8081/api/1.0/ckeditor-gallery-upload";
+const API_URL = "https://gala-staging-backend.herokuapp.com/api/1.0/ckeditor-gallery-upload";
 
 
 export default function MyEditor({ handleChange, ...props }) {
@@ -13,7 +13,11 @@ export default function MyEditor({ handleChange, ...props }) {
           const body = new FormData();
           loader.file.then((file) => {
             body.append("files", file);
-            Api.uploadImg(body)
+            fetch(`${API_URL}/${UPLOAD_ENDPOINT}`, {
+              method: "post",
+              body: body
+              // mode: "no-cors"
+            })
               .then((res) => {
                 resolve({
                   default: res.data.url
