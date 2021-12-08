@@ -65,7 +65,7 @@ const UpdateActivity =()=>{
               news: news?news:activity.news,
               summaryStatus:summaryStatus?summaryStatus:activity.summaryStatus,
               summary:summary?summary:activity.summary,
-              products: file?file:activity.products,
+              products: file?file:activity.products[0],
               duration:secondOption?secondOption:activity.duration,
         })
                 Api.updateActivity(id[3],data)
