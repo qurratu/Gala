@@ -1,8 +1,8 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-const API_URL = "http://localhost:8081/api/1.0/ckeditor-gallery-upload";
+import Api from "../../Api";
+// const API_URL = "http://localhost:8081/api/1.0/ckeditor-gallery-upload";
 
 
 export default function MyEditor({ handleChange, ...props }) {
@@ -13,12 +13,7 @@ export default function MyEditor({ handleChange, ...props }) {
           const body = new FormData();
           loader.file.then((file) => {
             body.append("files", file);
-            fetch(`${API_URL}`, {
-              method: "post",
-              body: body
-              // mode: "no-cors"
-            })
-              .then((res) => res.json())
+            Api.uploadImg(body)
               .then((res) => {
                 resolve({
                   default: res.data.url
