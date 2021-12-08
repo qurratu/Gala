@@ -13,7 +13,7 @@ export default function MyEditor({ handleChange, ...props }) {
           const body = new FormData();
           loader.file.then((file) => {
             body.append("files", file);
-            fetch(`${API_URL}/${UPLOAD_ENDPOINT}`, {
+            fetch(`${API_URL}`, {
               method: "post",
               body: body
               // mode: "no-cors"
