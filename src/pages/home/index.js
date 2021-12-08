@@ -203,7 +203,7 @@ return(
                     icon={faCalendar}
                   />{" "}
                    End:
-                 {item.duration&&item.duration.end_time.replace('T','  ').replace(':00.000Z',' ')}
+                 {item.duration[0].end_time.replace('T','  ').replace(':00.000Z',' ')}
                   </span>
 }
                
