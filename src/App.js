@@ -25,9 +25,9 @@ class App extends Component {
    
     return (
 
-      <BrowserRouter>      
+      <BrowserRouter >      
           <Switch>
-            {/* Authantication */}
+           
             <Route path="/" exact component={Auth} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/admin" exact component={AdminDashboard} />

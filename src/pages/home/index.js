@@ -1,6 +1,6 @@
 import React ,{ useState,useEffect} from 'react'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faGrin ,faSearch} from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faCalendar ,faSearch} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import './home.css'
@@ -22,7 +22,6 @@ const Home =()=>{
     const [totalPage,setTotalPage]=useState(1)
     const [selectedPage,setSelectedPage]=useState(0)
     const history = useHistory();
-
    
           useEffect(()=>{
             List_actiivity()
@@ -161,11 +160,6 @@ return(
                   <Link
                     className="clinic-name"
                     rel="canonical"
-                  //   onClick={localStorage.setItem(
-                  //     "clinicDetail",
-                  //     JSON.stringify(item)
-                  //   )}
-                  //   to={`${localRoute.details}/${slugName}-at-${item.slug}`}
                   >
                     <h5
                     style={{fontSize:'1.5vw'}}
@@ -174,9 +168,6 @@ return(
                    
                   </Link>
                   &nbsp;
-                    {/* <span className="plan-premier align-top">
-                      &nbsp;Premier Partner
-                    </span> */}
                 </span>{" "}
                 </div>
                 <div
@@ -188,19 +179,34 @@ return(
                   {item.location}
                 
               </div>
+              {item.duration&&item.duration[0]&&
               <div
                 
                 className="profile-address mt-2">
-                
-                  {/* <FontAwesomeIcon
+                  {item.duration[0].start_time&&
+                  
+                  <span>
+                  <FontAwesomeIcon
                     className="clinic-map-icon mr-1"
-                    icon={faMapMarkerAlt}
-                  />{" "} */}
+                    icon={faCalendar}
+                  />{" "}
                  Start:
-                 {item.duration&&item.duration.start_time}  End:
-                 {item.duration&&item.duration.end_time}
+                 {item.duration[0].start_time}
+                  </span>}
                 
-              </div>
+           {item.duration[0].end_time&&
+                  <span>
+                  <FontAwesomeIcon
+                    className="clinic-map-icon mr-1"
+                    icon={faCalendar}
+                  />{" "}
+                   End:
+                 {item.duration&&item.duration.end_time}
+                  </span>
+}
+               
+                
+              </div>}
               </Col>
             </Row>
               <Row className="mt-4">
