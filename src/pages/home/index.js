@@ -110,7 +110,7 @@ const Home =()=>{
 return(
 <>
 <div className='h-100 w-100 d-flex'>
-<Sidebar/>
+<Sidebar homePageList={activityList}/>
     
     <div className=' h-100 w-100'>
     <Header/>
@@ -184,7 +184,7 @@ return(
               {item.duration&&item.duration[0]&&
               <div
                 
-                className="profile-address mt-2">
+                className="profile-address date_duration mt-2">
                   {item.duration[0].start_time&&
                   
                   <span>
@@ -196,7 +196,7 @@ return(
                  {item.duration[0].start_time.replace('T','  ').replace(':00.000Z',' ')}
                   </span>}
                 
-           {item.duration[0].end_time&&
+                  {item.duration[0].end_time&&
                   <span>
                   <FontAwesomeIcon
                     className="clinic-map-icon mr-1"
@@ -236,7 +236,7 @@ return(
                 <Col sm={6}>
                   <Button
                     variant="primary"
-                    onClick={()=>history.push(`/home/news/${item._id}`)}
+                    onClick={()=>history.push(`/home/news-unjoin/${item._id}`)}
                     className="form-control book-btn"
                   >
                     Show Activity

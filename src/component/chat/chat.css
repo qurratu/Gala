@@ -15,8 +15,8 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .singleChat{
-    margin-top: 5%;
-    min-height: 25%;
+    margin-top: 3%;
+    min-height: 12%;
     padding: 2%;
 }
 
@@ -41,13 +41,13 @@
 } */
 
 .comented_chat button{
-    background-color: red !important;
-    border: red;
+    background-color: grey !important;
+    border: grey;
 }
 
 /* scroll bar css */
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 0px;
   }
   
   /* Track */
@@ -58,11 +58,11 @@
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: red; 
+    background: grey; 
     border-radius: 10px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background: grey; 
   }

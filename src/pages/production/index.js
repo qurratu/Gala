@@ -19,7 +19,7 @@ const ProductItem =(props)=>{
       id&&
       Api.getOneActivity(id[3])
       .then((res)=>{setActivity(res.data.data)
-        console.log('signle nactivity List',res)
+       
       })
       .catch((err)=>{
         err&& alert('please try again')})
@@ -31,6 +31,7 @@ const ProductItem =(props)=>{
               
           }
 
+          console.log('signle nactivity List',activity.products)
       const getcheckList =(e)=>{
       if(e.target.checked){
           setCheckList ([

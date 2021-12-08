@@ -16,6 +16,7 @@ const ActivityOption=(props)=> {
 
   return (
     <div className='activiyoptions h-100'>
+      <div>
     <div className='mb-2'>
     <span
                       rel="canonical"
@@ -68,9 +69,18 @@ const ActivityOption=(props)=> {
       to={`/home/summary/${id[3]}`}>
         Summary</Link>
         </div>
-      }
-    
+      }  </div>
+    <div className='h-50'>
+      {props.activity_data.property&&props.activity_data.property.map((item)=>(
+        <span key={item._id}>
+      <input type="checkbox" id="vehicle2" name="vehicle2" value="Car"/>
+  <label for="vehicle2" className='pl-3'> {item}</label><br/>
+      </span>
+      ))}
+      
    
+    </div>
+  
 </div>
   );
 }

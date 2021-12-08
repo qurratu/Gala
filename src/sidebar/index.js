@@ -10,7 +10,7 @@ import './../App.css'
 import logo from '../assets/logo8.png'
 
 import Api from '../Api';
-const Sidebar=()=> {
+const Sidebar=(props)=> {
   const [joinedList,setJoinedList]=useState('')
   const history = useHistory();
 let id= localStorage.getItem('userId')
@@ -21,7 +21,7 @@ useEffect(()=>{
   .then((res)=>{setJoinedList(res.data.data)
     // console.log('setJoinedList=============',res)
   })
-},[])
+},[props.homePageList&&props.homePageList])
 
 console.log('setJoinedList',joinedList)
   return (

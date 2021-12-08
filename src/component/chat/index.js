@@ -33,7 +33,7 @@ const Chat =(props)=>{
             id&&
             Api.getgroupchat(id[3])
             .then((res)=>{
-              setChatList(res.data.data.conversation)
+              setChatList(res.data.conversation)
               console.log('signlechat List',res)
             })
             .catch((err)=>{
@@ -69,18 +69,22 @@ const Chat =(props)=>{
           err&& alert('please try again')})
 
       }
+
+      console.log('chatlistchatlist',chatlist)
+
+
 return(
 
 <div className='h-100 w-100 d-flex'>
     <Sidebar/>
     <div className=' h-100 w-100'>
     <Header/>
-    <div className='d-flex jet'>
-    <Card className='w-100 mh-100 h-100 news_section my-auto mx-auto p-5'>
+    <div className='d-flex privatePage'>
+    <Card className='w-100 mh-100 h-100 news_section common_privatePage my-auto mx-auto p-5'>
     <h4>Chat with Activity participants </h4>
     <div className='createActivityRow w-75'>
-      {/* {chatlist&&chatlist.length>0?
-      chatlist.map((item)=>( */}
+      {chatlist&&chatlist.length>0?
+      chatlist.map((item)=>(
         <Card className='participatant singleChat comented_chat'>
                      
        <div className='useImg w-25 h-100'>
@@ -93,12 +97,13 @@ return(
        <div className='chatbox w-75 h-100'>
         
          <span className='chat_user_name '>
-         fffffffffffffffffffffffff
+           {`${item.postedByUser.first_name} ${item.postedByUser.first_name}`}
+        
          </span>
          <span
          className='chat_msg'
          >
-           fffffffffffffffffffffffff
+           {item.message.messageText}
          </span>
          
          </div>
@@ -114,9 +119,9 @@ return(
                                 </Button> */}
     
           </Card>
-      {/* ))
+    ))
        : <div className='w-75'>No chat yet</div>
-    } */}
+    }
                   
                    <Card className='participatant singleChat'>
                      

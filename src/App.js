@@ -17,6 +17,7 @@ import UpdateActivity from "./pages/updateActivity";
 import Chat from './component/chat'
 import Summary from "./component/summary";
 import './pages/loading.css'
+import NewsUnjoined from "./pages/news";
 
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
             <Route path="/admin/updateactivity/:id" exact  component={UpdateActivity} />
             <Route path="/home/chat/:id" exact  component={Chat} />
             <Route path="/home/summary/:id" exact  component={Summary} />
+            <Route path="/home/news-unjoin/:id" exact  component={NewsUnjoined} />
           
           
 

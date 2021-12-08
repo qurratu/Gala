@@ -1,13 +1,27 @@
 .jet{
- 
 border: 1px solid #F2F2F2;
 box-sizing: border-box;
 box-shadow: 1px 3px 17px rgba(0, 0, 0, 0.15);
 font-family: 'Roboto';
 border-radius: 8px;
 display: flex;
-height: 88%;
+height: 90%;
 overflow-y: scroll;
+overflow-x: hidden;
+align-items: center;
+}
+.privatePage{
+  border: 1px solid #F2F2F2;
+box-sizing: border-box;
+box-shadow: 1px 3px 17px rgba(0, 0, 0, 0.15);
+font-family: 'Roboto';
+border-radius: 8px;
+display: flex;
+height: 90%;
+
+}
+.common_privatePage{
+  overflow-y: scroll;
 overflow-x: hidden;
 align-items: center;
 }
