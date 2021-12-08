@@ -30,7 +30,8 @@ const Home =()=>{
 
 
           const List_actiivity=(pageno)=>{
-            document.getElementById("careerLoader").classList.add("loading")
+            let loader=document.getElementById("careerLoader")
+           loader&&loader.classList.add("loading")
             Api.getActivity(pageno)
           .then((res)=>{
             setActivityList(res.data.data)
@@ -44,9 +45,9 @@ const Home =()=>{
                 setTotalPage(b)
               }
             }
-            document.getElementById("careerLoader").classList.remove("loading")
+            loader&&loader.classList.remove("loading")
           })
-          .catch((err)=>  document.getElementById("careerLoader").classList.remove("loading"))
+          .catch((err)=>  loader&&loader.classList.remove("loading"))
         }
 
 
@@ -89,6 +90,7 @@ const Home =()=>{
       List_actiivity()
     })
       .catch(()=>{alert('please try again')
+
       document.getElementById("careerLoader").classList.remove("loading")}
       )
     }
@@ -191,7 +193,7 @@ return(
                     icon={faCalendar}
                   />{" "}
                  Start:
-                 {item.duration[0].start_time}
+                 {item.duration[0].start_time.replace('T','  ').replace(':00.000Z',' ')}
                   </span>}
                 
            {item.duration[0].end_time&&
@@ -201,7 +203,7 @@ return(
                     icon={faCalendar}
                   />{" "}
                    End:
-                 {item.duration&&item.duration.end_time}
+                 {item.duration&&item.duration.end_time.replace('T','  ').replace(':00.000Z',' ')}
                   </span>
 }
                
