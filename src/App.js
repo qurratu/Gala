@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
-import React, { Component } from 'react';
+import React, { Component ,lazy} from 'react';
 import AdminDashboard from './pages/adminDashbord'
 import './index.css';
 import 'react-bootstrap'
@@ -17,7 +17,9 @@ import UpdateActivity from "./pages/updateActivity";
 import Chat from './component/chat'
 import Summary from "./component/summary";
 import './pages/loading.css'
-import NewsUnjoined from "./pages/news";
+// import NewsUnjoined from "./pages/news";
+// const NewsUnjoined = lazy(() => import('./pages/news'));
+const NewsUnjoined = React.lazy(() => import("./pages/news"));
 
 
 class App extends Component {

@@ -41,11 +41,7 @@ return(
   
        
   <div className='infosection'>
-  <h2 
-  style={{marginBottom:'10%',
- fontSize:'2vw'
- }}
-  >Select items </h2>
+ 
       <div className='singleInfo'>
       <h6 className='infotitle'>Title:</h6>
       <h6 className='infovalue'>{activity.title}</h6>
@@ -62,14 +58,29 @@ return(
       <h6 className='infotitle'>Adress:</h6>
      <h6 className='infovalue'>{activity.location}</h6>
       </div>
-      <div className='singleInfo'>
+      {activity.duration&&
+          <>
+           <div className='singleInfo'>
       <h6 className='infotitle'>start Time:</h6>
-     <h6 className='infovalue'>{activity.duration&&activity.duration.start_time}</h6>
+     <h6 className='infovalue'>{
+              activity.duration[0].start_time&&
+              activity.duration[0].start_time.replace('T',' ').replace(':00.000Z',' ')}</h6>
       </div>
       <div className='singleInfo'>
       <h6 className='infotitle'>End Time:</h6>
-     <h6 className='infovalue'>{activity.duration&&activity.duration.end_time}</h6>
+     <h6 className='infovalue'>{
+              activity.duration[0].end_time&&
+              activity.duration[0].end_time.replace('T','  ').replace(':00.000Z',' ')}</h6>
       </div>
+              {/* <span className='schedule_time h-25 my-0 py-o'>Start: {
+              item.activity_id.duration[0].start_time&&
+              item.activity_id.duration[0].start_time.replace('T',' ').replace(':00.000Z',' ')}</span>
+              <span className='schedule_time my-0 h-25 py-0'>End: {
+              item.activity_id.duration[0].end_time&&
+              item.activity_id.duration[0].end_time.replace('T','  ').replace(':00.000Z',' ')}</span> */}
+            </>        
+          }
+     
    
   </div>
    

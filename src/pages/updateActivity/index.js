@@ -373,7 +373,7 @@ const UpdateActivity =()=>{
                            <form>
                                <div>
                                  <div id="img-preview"></div>
-                                 <input type="file" id="product1" onChange={(e)=>selectFile(e)} name="product1" accept="image/*" />
+                                 <input type="file" id="product1" onChange={selectFile} name="product1" accept="image/*" />
                                  <div className='price' id="Price_product1">
                                   
                                    {((file&&file.product1)||(production&&production.product1))&&
@@ -402,9 +402,9 @@ const UpdateActivity =()=>{
                            <form>
                                <div>
                                  <div id="img-preview"></div>
-                                 <input type="file" id="product2" onChange={(e)=>selectFile(e)} name="product2" accept="image/*" />
+                                 <input type="file" id="product2" onChange={selectFile} name="product2" accept="image/*" />
                                  <div className='price' id="Price_product2">
-                                   {console.log('time',production?.product2?.product_price)}
+                                  
                                  {((file&&file.product2)||(production.product2))&&
                                  <Form.Control
                                  name="price2"
@@ -431,7 +431,7 @@ const UpdateActivity =()=>{
                            <form>
                                <div>
                                  <div id="img-preview"></div>
-                                 <input type="file" id="product3" onChange={(e)=>selectFile(e)} name="product3" accept="image/*" />
+                                 <input type="file" id="product3" onChange={selectFile} name="product3" accept="image/*" />
                                  <div className='price' id="xPrice_product3">
                                    {console.log('testt',production.product3&&production.product3.product_price)}
                                  {((file&&file.product3)||(production.product3))&&
