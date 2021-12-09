@@ -1,8 +1,8 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Api from "../../Api";
-const API_URL = "https://gala-staging-backend.herokuapp.com/api/1.0/ckeditor-gallery-upload";
+
+const API_URL = "http://localhost:8081/api/1.0/ckeditor-gallery-upload";
 
 
 export default function MyEditor({ handleChange, ...props }) {
@@ -18,6 +18,7 @@ export default function MyEditor({ handleChange, ...props }) {
               body: body
               // mode: "no-cors"
             })
+              .then((res) => res.json())
               .then((res) => {
                 resolve({
                   default: res.data.url
@@ -39,7 +40,7 @@ export default function MyEditor({ handleChange, ...props }) {
   return (
     <div className="App">
       <CKEditor
-      
+
         config={{
           extraPlugins: [uploadPlugin]
         }}
@@ -48,7 +49,7 @@ export default function MyEditor({ handleChange, ...props }) {
         onReady={(editor) => {}}
         onBlur={(event, editor) => {}}
         onFocus={(event, editor) => {}}
-      
+
         onChange={(event, editor) => {
           handleChange(editor.getData());
         }}

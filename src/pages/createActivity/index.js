@@ -113,7 +113,7 @@ const CreateActivity =()=>{
 
      const onChange = (event) => {
       const { name, value} = event.target;
-      if(event.target.name==='product1_price'){
+       if(event.target.name==='product1_price'){
         file.product1['product_price'] = value;
        }else if(name==='product2_price'){
         file.product2['product_price'] = value;

@@ -83,22 +83,19 @@ const UpdateActivity =()=>{
     
 
     const showImg=(objext)=>{
-     
+      console.log('filefilefile',objext)
       if(objext){
         if(objext.product1){
-          console.log('filefilefile',objext.product1.url)
           let imgPreview = document.getElementById('product1').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product1.url + '" />';
         }
         if(objext.product2){
-          console.log('filefilefile',objext.product2.url)
           let imgPreview = document.getElementById('product2').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product2.url + '" />';
         }
         if(objext.product3){
-         
           let imgPreview = document.getElementById('product3').previousSibling;
           imgPreview.style.display = "block";
           imgPreview.innerHTML = '<img src="' + objext.product3.url + '" />';
@@ -109,8 +106,6 @@ const UpdateActivity =()=>{
 
     }
 
-
-    console.log('filefilefile',news)
     // make input as btn and show uploaded image
     const selectFile=(e)=> {
       // let name=e.target.name
@@ -158,18 +153,20 @@ const UpdateActivity =()=>{
 
 
      const onChange = (event) => {
-      const { name, value,files} = event.target;
-      if(event.target.name==='product1_price'){
-        file.product1['product_price'] = value;
-       }else if(name==='product2_price'){
-        file.product2['product_price'] = value;
-       }else if(name==='product3_price'){
-        file.product3['product_price'] = value;
-       }
+      const { name, value} = event.target;
+      //  if(event.target.name==='price1'){
+      //   file.product1['product_price'] = value;
+      //  }else if(name==='price2'){
+      //   file.product2['product_price'] = value;
+      //  }else if(name==='price3'){
+      //   file.product3['product_price'] = value;
+      //  }
+
       setFormValues({
         ...formValues,
         [name]: value
       });
+      console.log('name',value)
     }
     const handleFirstDate = (date) => {
         if (date) {
@@ -381,18 +378,19 @@ const UpdateActivity =()=>{
                                   
                                    {((file&&file.product1)||(production&&production.product1))&&
                                  <Form.Control
-                                 name="product1_price"
+                                 name="price1"
                                  type="number"
                                  inputmode="tel"
-                                //  defaultValue={production.product1&&production.product1.product_price
-                                //   ?production.product2.product_price:file.product2.product_price
-                                //   ?file.product2.product_price:0}
+                                 onChange={onChange}
+                                 defaultValue={production.product1&&production.product1.product_price
+                                  ?production.product2.product_price:file.product2?.product_price
+                                  ?file.product2.product_price:0}
                                  required
                                  placeholder="$500"
                                />
                                 
                                 } 
-{console.log('eeeeeee',production.product3)}
+
 
                                  </div>
                           
@@ -409,12 +407,13 @@ const UpdateActivity =()=>{
                                    {console.log('time',production?.product2?.product_price)}
                                  {((file&&file.product2)||(production.product2))&&
                                  <Form.Control
-                                 name="product2_price"
+                                 name="price2"
                                  type="number"
+                                 onChange={onChange}
                                  inputmode="tel"
-                                //  defaultValue={production.product2&&production.product2.product_price
-                                //   ?production.product2.product_price:file.product2.product_price
-                                //   ?file.product2.product_price:0}
+                                 defaultValue={production.product2&&production.product2.product_price
+                                  ?production.product2.product_price:file.product2?.product_price
+                                  ?file.product2.product_price:0}
                                  required
                                  placeholder="$500"
                                />
@@ -434,14 +433,16 @@ const UpdateActivity =()=>{
                                  <div id="img-preview"></div>
                                  <input type="file" id="product3" onChange={(e)=>selectFile(e)} name="product3" accept="image/*" />
                                  <div className='price' id="xPrice_product3">
+                                   {console.log('testt',production.product3&&production.product3.product_price)}
                                  {((file&&file.product3)||(production.product3))&&
                                  <Form.Control
                                  name="product3_price"
                                  type="number"
                                  inputmode="tel"
-                                //  defaultValue={production.product3&&production.product3.product_price
-                                //   ?production.product3.product_price:file.product3.product_price
-                                //   ?file.product3.product_price:0}
+                                 onChange={onChange}
+                                 defaultValue={production.product3&&production.product3.product_price
+                                  ?production.product3.product_price:file.product3?.product_price
+                                  ?file.product3.product_price:0}
                                  required
                                  placeholder="$500"
                                />
