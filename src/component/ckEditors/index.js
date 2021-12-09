@@ -1,8 +1,9 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+let a=`${process.env.REACT_APP_DNS_API_PREFETCH_URL}/api/1.0/`
 
-const API_URL = "https://gala-staging-backend.herokuapp.com/api/1.0/ckeditor-gallery-upload";
+const API_URL = `${process.env.REACT_APP_DNS_API_PREFETCH_URL}/api/1.0/ckeditor-gallery-upload`;
 
 
 export default function MyEditor({ handleChange, ...props }) {
